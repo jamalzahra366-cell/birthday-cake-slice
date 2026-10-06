@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>Birthday Cake Slice</title>
+    <meta
+      name="description"
+      content="Birthday Cake Slice is an original arcade-style cake slicing game inspired by swipe-to-slice mechanics."
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="game-shell">
+      <div id="hud" aria-live="polite">
+        <div class="hud-block score-block">
+          <span class="hud-label">Score</span>
+          <strong id="scoreValue">0</strong>
+        </div>
+
+        <div class="hud-block combo-block">
+          <span class="hud-label">Combo</span>
+          <strong id="comboValue">x1</strong>
+        </div>
+
+        <div class="hud-block lives-block">
+          <span class="hud-label">Lives</span>
+          <div id="livesValue" aria-label="Remaining lives">❤️ ❤️ ❤️</div>
+        </div>
+
+        <button id="pauseButton" type="button" aria-label="Pause game">Pause</button>
+      </div>
+
+      <canvas id="gameCanvas" aria-label="Birthday cake slicing game"></canvas>
+
+      <div id="startScreen" class="screen active" role="dialog" aria-modal="false">
+        <div class="panel start-panel">
+          <p class="eyebrow">Party Arcade</p>
+          <h1>Birthday Cake Slice</h1>
+          <div class="score-badge">
+            <span>High Score</span>
+            <strong id="startHighScore">0</strong>
+          </div>
+          <p class="instruction">Swipe to slice the cakes!</p>
+          <button id="startButton" type="button">Start Game</button>
+        </div>
+      </div>
+
+      <div id="pauseOverlay" class="screen hidden" role="dialog" aria-modal="false">
+        <div class="panel small-panel">
+          <h2>Paused</h2>
+          <button id="resumeButton" type="button">Resume</button>
+        </div>
+      </div>
+
+      <div id="gameOverScreen" class="screen hidden" role="dialog" aria-modal="false">
+        <div class="panel game-over-panel">
+          <p class="eyebrow">Party Over</p>
+          <h2>Game Over</h2>
+          <div class="stats">
+            <div>
+              <span>Final Score</span>
+              <strong id="finalScore">0</strong>
+            </div>
+            <div>
+              <span>Highest Combo</span>
+              <strong id="finalCombo">x1</strong>
+            </div>
+          </div>
+          <button id="playAgainButton" type="button">Play Again</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="game.js"></script>
+  </body>
+</html>

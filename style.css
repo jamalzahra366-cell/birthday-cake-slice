@@ -1,0 +1,317 @@
+:root {
+  --bg-deep: #1b1035;
+  --bg-mid: #4d2a6d;
+  --bg-pink: #ff6caf;
+  --bg-gold: #ffcf5c;
+  --panel-light: rgba(255, 255, 255, 0.9);
+  --panel-strong: rgba(255, 255, 255, 0.88);
+  --shadow: rgba(20, 7, 31, 0.25);
+  --accent: #ff7ec8;
+  --accent-2: #ffc75d;
+  --text: #2b1640;
+  --success: #53d18d;
+  --danger: #ff5b6e;
+  --purple: #6d4cc4;
+  --blue: #47b7ff;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 14px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background:
+    radial-gradient(circle at 20% 0%, rgba(255, 196, 113, 0.75), transparent 28%),
+    radial-gradient(circle at 80% 10%, rgba(255, 112, 166, 0.65), transparent 30%),
+    linear-gradient(180deg, #fdf5ff 0%, #f6d9ff 15%, #d9edff 100%);
+  color: var(--text);
+}
+
+button {
+  appearance: none;
+  border: none;
+  outline: none;
+  border-radius: 16px;
+  cursor: pointer;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+
+button:hover {
+  transform: translateY(-1px);
+}
+
+button:active {
+  transform: translateY(1px) scale(0.98);
+}
+
+#game-shell {
+  position: relative;
+  width: min(92vw, 900px);
+  height: min(86vh, 720px);
+  min-height: 540px;
+  border-radius: 28px;
+  overflow: hidden;
+  border: 3px solid rgba(255, 255, 255, 0.4);
+  background: linear-gradient(180deg, #fff4eb 0%, #dfeffd 100%);
+  box-shadow:
+    0 18px 50px rgba(42, 20, 61, 0.25),
+    inset 0 0 0 3px rgba(255, 255, 255, 0.28);
+}
+
+#gameCanvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  cursor: crosshair;
+  background: linear-gradient(180deg, rgba(145, 214, 255, 0.25), rgba(255, 234, 170, 0.18));
+}
+
+#hud {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  right: 14px;
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  pointer-events: none;
+}
+
+.hud-block {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 14px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.88);
+  border: 2px solid rgba(89, 64, 126, 0.18);
+  box-shadow: 0 8px 18px rgba(46, 30, 66, 0.12);
+  backdrop-filter: blur(4px);
+}
+
+.hud-label {
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 800;
+  color: rgba(43, 22, 64, 0.72);
+}
+
+#scoreValue,
+#comboValue {
+  font-size: clamp(1.15rem, 2vw, 1.85rem);
+  color: var(--text);
+}
+
+#livesValue {
+  font-size: clamp(1rem, 1.7vw, 1.4rem);
+  letter-spacing: 0.08em;
+}
+
+.score-block {
+  min-width: 120px;
+  justify-content: center;
+}
+
+.combo-block {
+  min-width: 120px;
+  justify-content: center;
+}
+
+.lives-block {
+  min-width: 140px;
+  justify-content: center;
+}
+
+#pauseButton {
+  pointer-events: auto;
+  background: linear-gradient(180deg, #ffedc7 0%, #ffd26d 100%);
+  padding: 10px 18px;
+  font-size: 0.9rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text);
+  box-shadow: 0 8px 18px rgba(255, 170, 54, 0.28);
+}
+
+.screen {
+  position: absolute;
+  inset: 0;
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(26, 16, 53, 0.28);
+}
+
+.screen.hidden {
+  display: none;
+}
+
+.panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: min(85%, 420px);
+  padding: 28px 22px 20px;
+  border-radius: 26px;
+  background: var(--panel-light);
+  border: 3px solid rgba(108, 84, 148, 0.18);
+  box-shadow: 0 26px 48px rgba(25, 14, 36, 0.15);
+  text-align: center;
+}
+
+.eyebrow {
+  margin-bottom: 8px;
+  font-size: 0.8rem;
+  font-weight: 900;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--purple);
+}
+
+h1,
+h2 {
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+  color: var(--text);
+}
+
+h1 {
+  font-size: clamp(2.4rem, 5vw, 4rem);
+  margin-bottom: 10px;
+}
+
+h2 {
+  font-size: clamp(2rem, 4vw, 3rem);
+  margin-bottom: 12px;
+}
+
+.score-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+  padding: 10px 16px;
+  border-radius: 14px;
+  background: linear-gradient(180deg, #fff1b0 0%, #ffd84d 100%);
+  color: var(--text);
+  font-weight: 800;
+  box-shadow: 0 8px 20px rgba(255, 183, 48, 0.2);
+}
+
+.score-badge strong {
+  font-size: 1.35rem;
+}
+
+.instruction {
+  margin-bottom: 18px;
+  font-size: 1.08rem;
+  font-weight: 700;
+  color: rgba(43, 22, 64, 0.8);
+}
+
+button#startButton,
+button#resumeButton,
+button#playAgainButton {
+  width: min(100%, 240px);
+  padding: 15px 20px;
+  background: linear-gradient(180deg, #ff8bc9 0%, #ff5ca8 100%);
+  color: white;
+  box-shadow: 0 10px 24px rgba(255, 92, 168, 0.3);
+}
+
+button#resumeButton,
+button#playAgainButton {
+  background: linear-gradient(180deg, #7ed7ff 0%, #48b1ff 100%);
+  box-shadow: 0 10px 24px rgba(72, 177, 255, 0.3);
+}
+
+.small-panel {
+  width: min(78%, 320px);
+}
+
+.stats {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(100px, 1fr));
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.stats > div {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 14px 12px;
+  border-radius: 16px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.7), rgba(255, 238, 199, 0.8));
+  border: 2px solid rgba(96, 71, 138, 0.18);
+}
+
+.stats span {
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(43, 22, 64, 0.72);
+}
+
+.stats strong {
+  font-size: clamp(1.2rem, 3vw, 1.8rem);
+}
+
+@media (max-width: 700px) {
+  body {
+    padding: 8px;
+  }
+
+  #game-shell {
+    width: 100vw;
+    height: 100vh;
+    min-height: 100vh;
+    border-radius: 0;
+    border: none;
+  }
+
+  #hud {
+    gap: 6px;
+    top: 10px;
+    left: 10px;
+    right: 10px;
+  }
+
+  .hud-block {
+    padding: 7px 10px;
+    gap: 8px;
+  }
+
+  .hud-label {
+    letter-spacing: 0.08em;
+  }
+
+  .stats {
+    grid-template-columns: 1fr;
+  }
+}
