@@ -1,6 +1,10 @@
 # Birthday Cake Slice
 
-A polished browser game that turns the classic swipe-to-slice arcade mechanic into an inspired birthday-party experience using custom vector-style cakes, simple generated sounds, and responsive canvas gameplay.
+a polished browser-based arcade game that transforms the classic swipte-to-slice arcade mechanic into an original birthday-party experience. The game features custome vector-style birthday cakes, generated sound effects, responsive HTML5 Canvas gaemplay, slicing effects, combos, scoring, and progressively challenging gameplay. 
+
+All game artwork, visual design, sounmds and gameplay implementation are designed specifically for this project. 
+
+I used AI to make this
 
 ## Features
 
